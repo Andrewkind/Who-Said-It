@@ -2,3 +2,22 @@ nav {
     background-color: black;
     color: white;
 }
+
+.submit-button, .clear-button {
+    color: white;
+    background-color: black;
+}
+
+.editable {
+    border: 1px solid black;
+}
+
+.buttons {
+    color: red;
+
+}
+
+article {
+    background-color: #ffe3d3;
+
+}
