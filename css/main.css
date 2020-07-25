@@ -15,7 +15,10 @@ h1 {
     text-align: center;
     font-weight: bold;
     font-size: 30px;
-    margin: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     transition: 5s;
 
 }
@@ -40,6 +43,8 @@ article {
     justify-self: center;
     -webkit-appearance: none;
     margin: 20px;
+    margin-bottom: 50px;
+
 }
 
 .details-container {
@@ -48,19 +53,6 @@ article {
     margin-top: 2px;
     font-size: 14px;
     justify-content: space-between;
-}
-
-.date {
-    grid-column: 2;
-}
-
-.delete {
-    grid-column: 1;
-}
-
-form {
-    margin: 25px;
-    display: grid;
 }
 
 input, textarea {
@@ -105,6 +97,8 @@ li {
     transition-duration: 2s;
 }
 
+li:hover { transform: scale(1.1); }
+
 .main-quote {
     margin: 18px;
     font-style: italic;
@@ -135,5 +129,30 @@ main {
     background-color: black;
     color: white;
     text-align: center;
-    height: 100px;
+    height: 35px;
   }
+
+  .footer-image {
+      transition: 1s;
+  }
+
+  /* Easter egg - rotation */
+  .rotate {
+    -ms-transform: rotate(360deg);
+     -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+ }
+ 
+ .normal {
+    -ms-transform: rotate(0deg);
+     -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+ }
+
+ .hint {
+    text-align: center;
+    margin-bottom: 50px;
+    cursor: pointer;
+ }
+
+ .hint:hover { transform: scale(1.1); }

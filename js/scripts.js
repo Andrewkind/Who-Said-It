@@ -1,8 +1,9 @@
 // Get Real quote and Real Author
 let author = "";
 let quote = "";
+let genre = "";
 
-let choiceCount = 0; // keep count of how many choices it took the user to get the right answer
+let quotesReady = 0; // we need 3 quotes to be ready to remove scnreen white-out
 
 let authors = []; // hold the 3 authors in array to make sure they do not repeat
 
@@ -13,10 +14,6 @@ var realPosition = Math.floor(Math.random() * 3) + 1;     // returns a random in
 setup();
 
 function setup() {
-
-  console.log("begin setup");
-
-
 
   setupReal(realPosition);
 
@@ -40,20 +37,23 @@ function setup() {
 
   }
 
-  const main = document.querySelector("main");
-  // Remove white out
-  setTimeout(() => {
-    main.classList.remove('fade');
-  }, 500);
-
 
 }
 
-function setupFake(realPosition) {
-  console.log(realPosition);
+function setupFakeTimed(position) {
+  setTimeout(() => {
+    setupFake(position);
+  }, 500);
+}
+
+function setupFake(position) {
+
+  // Results do not seem random if received too quickly, provide a sleep 
+  // Sleep to help with random
+
   // Need to get two fake authors
   const mainQuote = document.querySelector(".main-quote");
-  const authorLabel = document.querySelector(".author-label-" + realPosition);
+  const authorLabel = document.querySelector(".author-label-" + position);
 
   // Location for our request...
   axios.get("https://quote-garden.herokuapp.com/api/v2/quotes/random") // Type of request is GET.
@@ -64,17 +64,59 @@ function setupFake(realPosition) {
       quote = response.data.quote.quoteText;
       author = response.data.quote.quoteAuthor;
 
+      // Process Data received from the user API before outputting to the user
       if (author.length == 0) {
         author = " Anonymous";
       }
 
 
-      authorLabel.textContent = author;
 
+      let match = false;
+      for (previousAuthor of authors) {
+        if (author == previousAuthor) {
+          match = true;
+        }
+      }
 
+      // Process Data received from the user API before outputting to the user
+      // If this GET is giving us a duplicate author, re-run this function
+      if (match) {
+        setupFake(position);
+      }
+      else {
+        // Author is unique
+        authorLabel.textContent = author;
+        authors.push(author);
+        console.log(`push: ${author}`);
+        quoteReady();
+      }
     })
 }
 
+function uniqueAuthors() {
+  return ((authors[0] != authors[1]) && (authors[1] != authors[2]) && (authors[0] != authors[2]));
+}
+
+// If we have 3 ready quotes, remove the white out
+function quoteReady() {
+
+  quotesReady++;
+  if (quotesReady > 2) {
+
+    // Make sure all authors are unique, or setup the authors again
+    if (uniqueAuthors()) {
+      const main = document.querySelector("main");
+      main.classList.remove('fade');
+    }
+    else {
+      quotesReady = 0;
+      authors = [];
+      setup();
+    }
+
+  }
+
+}
 
 function setupReal(realPosition) {
 
@@ -84,13 +126,12 @@ function setupReal(realPosition) {
   axios.get("https://quote-garden.herokuapp.com/api/v2/quotes/random") // Type of request is GET.
     // Handle response...
     .then(response => {
-      // Test test test! Are we getting anything?
-      console.log(response); // Yep! Looks like our info we want is in response.data
-      // Let's grab that space station's realPosition details!
+
+      console.log(response);
 
       quote = response.data.quote.quoteText;
       author = response.data.quote.quoteAuthor;
-
+      genre = response.data.quote.quoteGenre;
       const mainQuote = document.querySelector(".main-quote");
       const author1 = document.querySelector(".author-label-1");
       const author2 = document.querySelector(".author-label-2");
@@ -98,12 +139,16 @@ function setupReal(realPosition) {
 
       mainQuote.textContent = quote;
 
-
+      // Process Data received from the user API before outputting to the user
       if (author.length == 0) {
         author = " Anonymous";
       }
 
       authorLabel.textContent = author;
+      authors.push(author);
+      console.log(`push: ${author}`);
+
+      quoteReady();
 
 
     })
@@ -141,11 +186,15 @@ function author2Click() {
   checkUserAnswer(2);
 }
 
-
 function author3Click() {
   checkUserAnswer(3);
 }
 
+
+/**
+ * Function will determine if the user's selection was the correct answer
+ * @param {*} userPosition 
+ */
 function checkUserAnswer(userPosition) {
   const choice = document.querySelector(".author-label-" + userPosition)
 
@@ -159,6 +208,7 @@ function checkUserAnswer(userPosition) {
 
     setTimeout(() => {
       button.classList.remove("hide");
+      button.scrollIntoView();
 
     }, 1000);
   }
@@ -167,3 +217,21 @@ function checkUserAnswer(userPosition) {
   }
 
 }
+
+// easter egg
+// spinning cat in footer
+const footerImage = document.querySelector(".footer-image");
+footerImage.addEventListener("click", function () {
+  this.classList.add("rotate");
+  setTimeout(() => {
+    this.classList.remove("rotate");
+
+  }, 1500);
+});
+
+// Add hint
+const hint = document.querySelector(".hint");
+hint.addEventListener("click", function () {
+
+  this.innerText = `genre: ${genre}`;
+});
