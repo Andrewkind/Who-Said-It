@@ -14,13 +14,17 @@ nav {
 h1 {
     text-align: center;
     font-weight: bold;
-    font-size: 26px;
+    font-size: 30px;
     margin: 25px;
+    transition: 5s;
+
 }
 
 h2 {
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 24px;
+    text-align: center;
+
 }
 
 article {
@@ -28,8 +32,14 @@ article {
     margin-bottom: 5px;
 }
 
-.buttons {
+.button {
     cursor: pointer;
+    width: 60%;
+    height: 60px;
+    font-size: 22px;
+    justify-self: center;
+    -webkit-appearance: none;
+    margin: 20px;
 }
 
 .details-container {
@@ -57,25 +67,6 @@ input, textarea {
     margin-bottom: 10px;
 }
 
-.submit-button, .clear-button {
-    width: 60%;
-    height: 60px;
-    font-size: 22px;
-    justify-self: center;
-    -webkit-appearance: none;
-}
-
-.buttons {
-    display: grid;
-}
-
-.submit-button {
-    grid-column: 1;
-}
-
-.clear-button {
-    grid-column: 2;
-}
 
 p {
     margin-top: 10px;
@@ -103,4 +94,46 @@ textarea {
 section {
     display: grid;
     justify-content: center;
+    transition: 2s;
 }
+
+li {
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+    font-size: 28px;
+    transition-duration: 2s;
+}
+
+.main-quote {
+    margin: 18px;
+    font-style: italic;
+}
+
+.picked-wrong {
+    text-decoration: line-through;
+}
+
+.hide {
+    display: none;
+}
+
+main {
+    opacity: 1;
+    transition: 0.7s opacity;
+  }
+  
+ main.fade {
+      opacity: 0;
+  }
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 100px;
+  }

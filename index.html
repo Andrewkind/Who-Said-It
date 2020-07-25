@@ -9,9 +9,9 @@
   <meta name="keywords" content="HTML, CSS, JavaScript">
   <meta name="author" content="Andrew Kind">
 
-    <!-- Decorate Page -->
-    <title>Index - Who Said It?</title>
-    <link rel="icon" href="media/cat-logo.png">
+  <!-- Decorate Page -->
+  <title>Index - Who Said It?</title>
+  <link rel="icon" href="media/cat-logo.png">
 
   <title>Who Said It?</title>
 
@@ -34,15 +34,23 @@
   <!-- Script(s): -->
   <script type="text/javascript" src="js/scripts.js" defer></script>
 
-  
+
 </head>
+
 <body>
+
+
+
   <header>
     <nav>
       <div>Who Said It?</div>
     </nav>
   </header>
-  <main>
+
+
+
+
+  <main class="fade">
     <h1>Quote:</h1>
     <!-- Section for blog posts -->
     <section>
@@ -53,22 +61,31 @@
     </section>
 
     <section>
-      <h1>Author:</h1>
-      <h2>Make your choice!</h2>
-    <ul>
-        <li>
+      <h1>Make your choice!</h1>
+      <h2>The author was...</h2>
+      <ul>
+        <li class="author-li-1">
           <label class="author-label-1"> first author</label>
         </li>
-        <li>
+        <li class="author-li-2">
           <label class="author-label-2"> 2nd author</label>
         </li>
-        <li>
+        <li class="author-li-3">
           <label class="author-label-3"> 3rd author</label>
         </li>
 
-    </ul>  
+      </ul>
+      <input type="button" class="button hide" value="AGAIN">
+
     </section>
+
   </main>
+
+  <footer>
+    <p>Footer</p>
+  </footer>
+
+
 </body>
 
 </html>

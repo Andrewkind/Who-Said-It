@@ -12,12 +12,30 @@ nav {
     border: 1px solid black;
 }
 
-.buttons {
-    color: red;
-
-}
-
 article {
     background-color: #ffe3d3;
 
+}
+
+li {
+    color: black;
+    background-color: white;
+}
+
+.picked-wrong {
+    color: red;
+}
+
+.picked-correct {
+    color: white;
+}
+
+.picked-correct-li {
+    background-color: green;
+
+}
+
+.button {
+    background-color: black;
+    color: white;
 }
