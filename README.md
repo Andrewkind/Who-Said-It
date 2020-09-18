@@ -4,7 +4,7 @@ A Web Game where you get a QUOTE and you must answer who the AUTHOR was!
 
 Try it out: https://andrewkind.github.io/Who-Said-It/
 
-![whosaidit](/whosaidit.png)
+![whosaidit](/whosaidit-small.png)
 
 Features: 
 Using Axios framework for AJAX. 
