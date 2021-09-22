@@ -10,7 +10,6 @@ let authors = []; // hold the 3 authors in array to make sure they do not repeat
 // One of three choices must be the real realPosition. Determine the realPosition.
 var realPosition = Math.floor(Math.random() * 3) + 1;     // returns a random integer from 0 to 9 
 
-
 setup();
 
 function setup() {
@@ -20,10 +19,9 @@ function setup() {
   if (realPosition == 1) {
     // Real realPosition is in 1
 
-    //set up fake for 2 and 3
+    // Set up fake for 2 and 3
     setupFake(2);
     setupFake(3);
-
   }
   else if (realPosition == 2) {
     // Real realPosition is in 2
@@ -34,10 +32,7 @@ function setup() {
     // Real realPosition is in 3
     setupFake(1);
     setupFake(2);
-
   }
-
-
 }
 
 function setupFakeTimed(position) {
@@ -56,7 +51,7 @@ function setupFake(position) {
   const authorLabel = document.querySelector(".author-label-" + position);
 
   // Location for our request...
-  axios.get("https://quote-garden.herokuapp.com/api/v2/quotes/random") // Type of request is GET.
+  axios.get("https://quote-garden.herokuapp.com/api/v3/quotes/random") // Type of request is GET.
     // Handle response...
     .then(response => {
       console.log(response);
@@ -68,8 +63,6 @@ function setupFake(position) {
       if (author.length == 0) {
         author = " Anonymous";
       }
-
-
 
       let match = false;
       for (previousAuthor of authors) {
@@ -113,9 +106,7 @@ function quoteReady() {
       authors = [];
       setup();
     }
-
   }
-
 }
 
 function setupReal(realPosition) {
@@ -123,7 +114,7 @@ function setupReal(realPosition) {
   const authorLabel = document.querySelector(".author-label-" + realPosition);
 
   // Location for our request...
-  axios.get("https://quote-garden.herokuapp.com/api/v2/quotes/random") // Type of request is GET.
+  axios.get("https://quote-garden.herokuapp.com/api/v3/quotes/random") // Type of request is GET.
     // Handle response...
     .then(response => {
 
@@ -149,7 +140,6 @@ function setupReal(realPosition) {
       console.log(`push: ${author}`);
 
       quoteReady();
-
 
     })
 }
@@ -190,7 +180,6 @@ function author3Click() {
   checkUserAnswer(3);
 }
 
-
 /**
  * Function will determine if the user's selection was the correct answer
  * @param {*} userPosition 
@@ -201,7 +190,6 @@ function checkUserAnswer(userPosition) {
   if (userPosition === realPosition) {
     choice.classList.add("picked-correct");
     choice.parentNode.classList.add("picked-correct-li");
-
 
     // Show again button
     const button = document.querySelector(".button");
