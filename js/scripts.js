@@ -56,8 +56,8 @@ function setupFake(position) {
     .then(response => {
       console.log(response);
 
-      quote = response.data.quote.quoteText;
-      author = response.data.quote.quoteAuthor;
+      quote = response.data.data[0].quoteText;
+      author = response.data.data[0].quoteAuthor;
 
       // Process Data received from the user API before outputting to the user
       if (author.length == 0) {
@@ -120,9 +120,9 @@ function setupReal(realPosition) {
 
       console.log(response);
 
-      quote = response.data.quote.quoteText;
-      author = response.data.quote.quoteAuthor;
-      genre = response.data.quote.quoteGenre;
+      quote = response.data.data[0].quoteText;
+      author = response.data.data[0].quoteAuthor;
+      genre = response.data.data[0].quoteGenre;
       const mainQuote = document.querySelector(".main-quote");
       const author1 = document.querySelector(".author-label-1");
       const author2 = document.querySelector(".author-label-2");
